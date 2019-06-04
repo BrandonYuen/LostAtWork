@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "dev": "lostatworkapp",
+    "default": "lostatworkapp"
+  },
+  "targets": {
+    "lostatworkapp": {
+      "hosting": {
+        "lostatwork": [
+          "lostatwork"
+        ]
+      }
+    }
+  }
+}
