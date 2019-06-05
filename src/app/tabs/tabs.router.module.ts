@@ -13,6 +13,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../diary/diary.module#DiaryPageModule'
+          },
+          {
+            path: ':diaryId',
+            loadChildren: '../diary/diary-entry-detail/diary-entry-detail.module#DiaryEntryDetailPageModule'
           }
         ]
       },

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DiaryEntry } from './diary-entry/diary-entry.model';
+import { DiaryEntriesService } from './diary-entries.service';
 
 @Component({
   selector: 'app-diary',
@@ -6,4 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['diary.page.scss']
 })
 
-export class DiaryPage {}
+export class DiaryPage implements OnInit{
+  diaryEntries: DiaryEntry[];
+
+  constructor(private diaryEntryService: DiaryEntriesService) {
+    this.diaryEntries = diaryEntryService.getAllEntries();
+  }
+
+  ngOnInit() {}
+}

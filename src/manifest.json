@@ -1,7 +1,7 @@
 {
-  "name": "app",
-  "short_name": "app",
-  "theme_color": "#1976d2",
+  "name": "Lost At Work",
+  "short_name": "LostAtWork",
+  "theme_color": "#535353",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

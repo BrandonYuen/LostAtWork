@@ -1,0 +1,10 @@
+<ion-card no-margin [routerLink]="['/tabs/diary', diaryEntry.id]" routerDirection="forward">
+  <ion-card-header>
+    <ion-card-subtitle>{{ diaryEntry.date }}</ion-card-subtitle>
+    <ion-card-title>{{ diaryEntry.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+      {{ diaryEntry.content }}
+  </ion-card-content>
+</ion-card>
