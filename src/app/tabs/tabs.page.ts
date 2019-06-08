@@ -8,8 +8,4 @@ import { PwaService } from '../pwa-service.service';
 })
 export class TabsPage {
   constructor(public pwaService: PwaService) {}
-
-  installPwa() {
-    this.pwaService.promptEvent.prompt();
-  }
 }

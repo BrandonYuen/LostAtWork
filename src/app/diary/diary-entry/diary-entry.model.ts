@@ -1,6 +1,7 @@
 export interface DiaryEntry {
   id: string;
-  title: string;
   date: string;
+  title: string;
+  misconductType: string;
   content: string;
 }
