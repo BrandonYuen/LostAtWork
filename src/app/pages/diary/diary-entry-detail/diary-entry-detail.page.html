@@ -1,0 +1,39 @@
+<ion-header *ngIf="(diaryEntry$ | async) as diaryEntry">
+  <ion-toolbar color="primary">
+    <ion-title>{{ diaryEntry.title }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/diary"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(diaryEntry$ | async) as diaryEntry">
+  <ion-card color="light">
+    <ion-card-content>
+      <div margin-bottom text-center>
+        <h1><strong>{{ diaryEntry.title }}</strong></h1>
+        Entry created on: {{ diaryEntry.date.toLocaleDateString() }}
+      </div>
+      <div margin-bottom>
+        <h2><strong>Type of misconduct</strong></h2>
+        <ion-chip color="secondary">
+          <ion-label color="secondary">{{ diaryEntry.misconductType }}</ion-label>
+        </ion-chip>
+      </div>
+      <div>
+          <h2><strong>Description</strong></h2>
+          {{ diaryEntry.content }}
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary"><ion-icon name="create"></ion-icon></ion-fab-button>
+      <ion-fab-button color="danger"><ion-icon name="trash"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

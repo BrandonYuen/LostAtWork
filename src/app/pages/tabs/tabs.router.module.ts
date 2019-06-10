@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'diary',
@@ -15,7 +17,11 @@ const routes: Routes = [
             loadChildren: '../diary/diary.module#DiaryPageModule'
           },
           {
-            path: ':diaryId',
+            path: 'newEntry',
+            loadChildren: '../diary/diary-entry-create/diary-entry-create.module#DiaryEntryCreatePageModule'
+          },
+          {
+            path: 'entry/:diaryId',
             loadChildren: '../diary/diary-entry-detail/diary-entry-detail.module#DiaryEntryDetailPageModule'
           }
         ]
@@ -41,14 +47,10 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/tabs/diary',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuardService]
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/diary',
-    pathMatch: 'full'
   }
 ];
 

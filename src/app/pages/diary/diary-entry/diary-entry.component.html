@@ -1,0 +1,9 @@
+<ion-card color="light" no-margin [routerLink]="['/tabs/diary/entry', diaryEntry._id]" routerDirection="forward">
+  <ion-card-content>
+      <div margin-bottom>
+        <h3 no-margin> <strong>{{ diaryEntry.date.toLocaleDateString() }}</strong></h3>
+        <h1 no-margin> <strong>{{ diaryEntry.title }}</strong></h1>
+      </div>
+      {{ diaryEntry.content }}
+  </ion-card-content>
+</ion-card>

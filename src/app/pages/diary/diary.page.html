@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Diary Tab
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" color="white" (click)="logout()">
+        Logout
+        <ion-icon slot="end" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="noEntries">
+        <ion-card color="primary">
+          <ion-card-content text-center>
+            <strong>Your diary is empty.</strong>
+            <h6>Click the + button to add a diary entry.</h6>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm="6" size-md="4" *ngFor="let entry of diaryEntries$ | async">
+        <app-diary-entry [diaryEntry]="entry"></app-diary-entry>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" [routerLink]="['/tabs/diary/newEntry']" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>

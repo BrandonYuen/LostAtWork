@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PwaService } from '../pwa-service.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,5 +6,5 @@ import { PwaService } from '../pwa-service.service';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  constructor(public pwaService: PwaService) {}
+  constructor() {}
 }

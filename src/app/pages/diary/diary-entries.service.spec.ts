@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DiaryEntriesService } from './diary-entries.service';
+import { DiaryEntriesService } from '../../services/diary.service';
 
 describe('DiaryEntriesService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
