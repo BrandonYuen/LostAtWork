@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { DiaryEntry } from 'src/app/models/diary-entry.model';
 import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-diary-entry-edit',
