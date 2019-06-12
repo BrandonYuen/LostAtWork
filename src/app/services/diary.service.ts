@@ -87,36 +87,49 @@ export class DiaryService {
   createEntry(entry: DiaryEntry) {
     return this.http.post(`${this.baseUrl}/api/diary`, entry)
     .pipe(
-      map((entry: DiaryEntry) => {
-        entry.date = new Date(entry.date);
-        return entry;
+      map((createdEntry: DiaryEntry) => {
+        createdEntry.date = new Date(createdEntry.date);
+        return createdEntry;
       }),
       tap((createdEntry: DiaryEntry) => {
-        console.log('Created new entry: ', createdEntry);
-        this.dataStore.diaryEntries.push(createdEntry);
+        // Add the entry to the datastore
+        this.dataStore.diaryEntries.unshift(createdEntry);
         this._diaryEntries.next(Object.assign({}, this.dataStore).diaryEntries);
+        console.log('Created new entry: ', createdEntry);
       })
     );
   }
 
   updateEntry(entry: DiaryEntry) {
-    this.http.put(`${this.baseUrl}/todos/${entry._id}`, JSON.stringify(entry))
-      .subscribe((updatedEntry: DiaryEntry) => {
+    return this.http.put(`${this.baseUrl}/api/diary/${entry._id}`, entry)
+    .pipe(
+      tap( (updatedEntry: DiaryEntry) => {
+        // Update date to actual Date object
+        updatedEntry.date = new Date(updatedEntry.date);
+
+        // Update the entry in the datastore
         this.dataStore.diaryEntries.forEach((e, i) => {
           if (e._id === updatedEntry._id) { this.dataStore.diaryEntries[i] = updatedEntry; }
         });
 
         this._diaryEntries.next(Object.assign({}, this.dataStore).diaryEntries);
-      }, error => console.log('Could not update todo.'));
+        console.log('Removed entry with ID: ', entry._id);
+      })
+    );
   }
 
   removeEntry(entry: DiaryEntry) {
-    this.http.delete(`${this.baseUrl}/api/diary/${entry._id}`).subscribe(response => {
-      this.dataStore.diaryEntries.forEach((e, i) => {
-        if (e._id === entry._id) { this.dataStore.diaryEntries.splice(i, 1); }
-      });
+    return this.http.delete(`${this.baseUrl}/api/diary/${entry._id}`)
+    .pipe(
+      tap( response => {
+        // Remove the entry from the datastore
+        this.dataStore.diaryEntries.forEach((e, i) => {
+          if (e._id === entry._id) { this.dataStore.diaryEntries.splice(i, 1); }
+        });
 
-      this._diaryEntries.next(Object.assign({}, this.dataStore).diaryEntries);
-    }, error => console.log('Could not delete todo.'));
+        this._diaryEntries.next(Object.assign({}, this.dataStore).diaryEntries);
+        console.log('Removed entry with ID: ', entry._id);
+      })
+    );
   }
 }

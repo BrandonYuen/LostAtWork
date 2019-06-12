@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { NavController } from '@ionic/angular';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,11 @@ export class LoginPage implements OnInit {
 
   credentialsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private navController: NavController) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private navController: NavController
+  ) { }
 
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
@@ -24,6 +29,10 @@ export class LoginPage implements OnInit {
   onSubmit() {
     this.authService.login(this.credentialsForm.value).subscribe(res => {
       this.navController.navigateForward('/tabs');
+    }, err => {
+      if (err instanceof HttpErrorResponse) {
+        this.authService.showAlert('Can\'t connect to server.')
+      }
     });
   }
 
@@ -33,7 +42,17 @@ export class LoginPage implements OnInit {
       this.authService.login(this.credentialsForm.value).subscribe(res => {
         this.navController.navigateForward('/tabs');
       });
-    });
+    }, err => this.handleError(err));
   }
 
+  handleError(e: any) {
+    switch (e.status) {
+      case 400:
+        this.authService.showAlert(e.error.msg);
+        break;
+      default:
+        this.authService.showAlert('Can\'t connect to server.');
+        break;
+    }
+  }
 }

@@ -32,10 +32,11 @@ export class DiaryEntryCreatePage implements OnInit {
   }
 
   onSubmit() {
-    console.log('on Submit: ', this.entryForm.value)
-    this.diaryService.createEntry(this.entryForm.value).subscribe(res => {
-      this.navController.navigateBack(['tabs/diary/']);
-    });
+    if (!this.entryForm.invalid) {
+      this.diaryService.createEntry(this.entryForm.value).subscribe(res => {
+        this.navController.navigateBack(['tabs/diary/']);
+      });
+    }
   }
 
   back() {

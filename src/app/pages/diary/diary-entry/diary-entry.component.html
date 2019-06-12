@@ -4,6 +4,7 @@
         <h3 no-margin> <strong>{{ diaryEntry.date.toLocaleDateString() }}</strong></h3>
         <h1 no-margin> <strong>{{ diaryEntry.title }}</strong></h1>
       </div>
-      {{ diaryEntry.content }}
+      <p>{{ diaryEntry.content.substr(0, 150) + '...' }}</p>
+      <h6 text-center style="font-style: italic">(Click to read more)</h6>
   </ion-card-content>
 </ion-card>

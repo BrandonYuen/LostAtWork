@@ -45,12 +45,7 @@ export class AuthService {
   }
 
   register(credentials) {
-    return this.http.post(`${this.url}/api/register`, credentials).pipe(
-      catchError(e => {
-        this.showAlert(e.error.msg);
-        throw new Error(e);
-      })
-    );
+    return this.http.post(`${this.url}/api/register`, credentials);
   }
 
   login(credentials) {
@@ -60,10 +55,6 @@ export class AuthService {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
           this.authenticationState.next(true);
-        }),
-        catchError(e => {
-          this.showAlert(e.error.msg);
-          throw new Error(e);
         })
       );
   }
@@ -81,7 +72,7 @@ export class AuthService {
   showAlert(msg) {
     const alert = this.alertController.create({
       message: msg,
-      header: 'Unauthorized',
+      header: 'Error',
       buttons: ['OK']
     });
     alert.then(alert => alert.present());

@@ -22,7 +22,16 @@ const routes: Routes = [
           },
           {
             path: 'entry/:diaryId',
-            loadChildren: '../diary/diary-entry-detail/diary-entry-detail.module#DiaryEntryDetailPageModule'
+            children: [
+              {
+                path: '',
+                loadChildren: '../diary/diary-entry-detail/diary-entry-detail.module#DiaryEntryDetailPageModule'
+              },
+              {
+                path: 'edit',
+                loadChildren: '../diary/diary-entry-edit/diary-entry-edit.module#DiaryEntryEditPageModule'
+              }
+            ]
           }
         ]
       },
