@@ -10,7 +10,7 @@ export class PwaService {
     const navigator: any = window.navigator;
 
     // Listen for possible service worker update (new version of pwa)
-    swUpdate.available.subscribe(event => {
+    this.swUpdate.available.subscribe(event => {
       // TODO: Ask user with alert if he wants to reload page / update
       this.presentAlertUpdateApp();
     });
@@ -55,7 +55,7 @@ export class PwaService {
       ]
     });
 
-    await alert.present();
+    alert.present();
   }
 
   async presentToastForAndroid() {

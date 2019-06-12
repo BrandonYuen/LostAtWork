@@ -4,6 +4,7 @@ import { Platform, NavController,  } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
+import { PwaService } from './services/pwa-service.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private auth: AuthService,
-    private navController: NavController
+    private navController: NavController,
+    private pwaService: PwaService
   ) {
     this.initializeApp();
   }
