@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   api: {
-    url: 'http://brandonyuen.nl:8888'
+    url: 'https://brandonyuen.nl:8888'
   }
 };
