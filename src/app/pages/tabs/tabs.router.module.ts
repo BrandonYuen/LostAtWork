@@ -45,11 +45,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'help',
+        path: 'chat',
         children: [
           {
             path: '',
-            loadChildren: '../help/help.module#HelpPageModule'
+            loadChildren: '../chat/chat.module#ChatPageModule'
           }
         ]
       },

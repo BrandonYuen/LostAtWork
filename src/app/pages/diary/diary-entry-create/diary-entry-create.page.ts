@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DiaryService } from 'src/app/services/diary.service';
 import { NavController, AlertController } from '@ionic/angular';
+import { HideTabOnInputService } from 'src/app/services/hide-tab-on-input.service';
 
 @Component({
   selector: 'app-diary-entry-create',
@@ -16,7 +17,8 @@ export class DiaryEntryCreatePage implements OnInit {
     private formBuilder: FormBuilder,
     private diaryService: DiaryService,
     private navController: NavController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private hideTabsOnInput: HideTabOnInputService
   ) { }
 
   // convenience getter for easy access to form fields
@@ -29,6 +31,9 @@ export class DiaryEntryCreatePage implements OnInit {
       misconductType: ['', [Validators.required]],
       content: ['', [Validators.required, Validators.minLength(20)]]
     });
+
+    // Automatically generate listeners for all inputs to hide tab bar
+    this.hideTabsOnInput.createListeners();
   }
 
   onSubmit() {

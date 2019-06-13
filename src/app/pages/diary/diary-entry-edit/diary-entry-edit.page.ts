@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { DiaryEntry } from 'src/app/models/diary-entry.model';
 import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
+import { HideTabOnInputService } from 'src/app/services/hide-tab-on-input.service';
 
 @Component({
   selector: 'app-diary-entry-edit',
@@ -23,7 +24,8 @@ export class DiaryEntryEditPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private diaryService: DiaryService,
     private navController: NavController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private hideTabsOnInput: HideTabOnInputService
   ) { }
 
   // convenience getter for easy access to form fields
@@ -59,6 +61,9 @@ export class DiaryEntryEditPage implements OnInit {
             content: entry.content,
             misconductType: entry.misconductType
           });
+    
+          // Automatically generate listeners for all inputs to hide tab bar
+          this.hideTabsOnInput.createListeners();
         })
       );
 

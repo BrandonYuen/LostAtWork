@@ -1,6 +1,6 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom" color="primary">
+  <ion-tab-bar [hidden]="hideTabBar$ | async" slot="bottom" color="primary">
     <ion-tab-button tab="diary">
       <ion-icon name="folder"></ion-icon>
       <ion-label>Diary</ion-label>
@@ -11,9 +11,9 @@
       <ion-label>Guide</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="help">
+    <ion-tab-button tab="chat">
       <ion-icon name="chatboxes"></ion-icon>
-      <ion-label>Help</ion-label>
+      <ion-label>Chat</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

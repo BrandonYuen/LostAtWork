@@ -10,11 +10,11 @@
   </ion-header>
   
   <ion-content>
-      <ion-card>
+      <ion-card color="light">
         <ion-card-content>
           <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
           
-            <ion-item>
+            <ion-item color="light">
               <!-- <ion-icon slot="start" name="log-out"></ion-icon> -->
               <ion-label position="floating"><strong>Title</strong></ion-label>
               <ion-input type="text" formControlName="title" placeholder="Write a title"></ion-input>
@@ -24,7 +24,7 @@
                 <div *ngIf="f['title'].errors.minlength">Title must be at least 3 characters</div>
             </div>
 
-            <ion-item margin-top>
+            <ion-item color="light" margin-top>
               <ion-label position="floating"><strong>Type of misconduct</strong></ion-label>
               <ion-select okText="Select" cancelText="Cancel" formControlName="misconductType" placeholder="Select misconduct type">
                 <ion-select-option value="Aggression">Aggression</ion-select-option>
@@ -40,7 +40,7 @@
                 <div *ngIf="f['misconductType'].errors.required">Misconduct type is required</div>
             </div>
 
-            <ion-item margin-top class="form-group">
+            <ion-item color="light" margin-top class="form-group">
               <ion-label position="floating"><strong>Description</strong></ion-label>
               <ion-textarea rows="10" placeholder="Describe what happened..." formControlName="content"></ion-textarea>
             </ion-item>
