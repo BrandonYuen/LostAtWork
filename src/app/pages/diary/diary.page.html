@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Diary Tab
+      Dagboek
     </ion-title>
     <ion-buttons slot="primary">
       <ion-button fill="solid" color="white" (click)="logout()">
-        Logout
+        Uitloggen
         <ion-icon slot="end" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -18,8 +18,8 @@
       <ion-col *ngIf="noEntries">
         <ion-card color="primary">
           <ion-card-content text-center>
-            <strong>Your diary is empty.</strong>
-            <h6>Click the + button to add a diary entry.</h6>
+            <strong>Je dagboek is leeg.</strong>
+            <h6>Klik de + knop om een nieuwe gebeurtenis toe te voegen. Probeer je dagboek goed bij te houden en de gebeurtenissen zo goed mogelijk te omschrijven. </h6>
           </ion-card-content>
         </ion-card>
       </ion-col>

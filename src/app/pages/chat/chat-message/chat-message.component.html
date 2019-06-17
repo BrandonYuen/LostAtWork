@@ -1,0 +1,62 @@
+<ion-row *ngIf="chatMessage.senderType == 'expert' && !user.isExpert" justify-content-start>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <p no-margin margin-start margin-end margin-top style="font-size: 0.8em">{{ getReadableDayFromDate(chatMessage.date) }} - {{ chatMessage.date.getHours() }}:{{ chatMessage.date.getMinutes() }} </p>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="chatMessage.senderType == 'expert' && !user.isExpert" justify-content-start>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <ion-card no-margin margin-start margin-end color="light">
+      <ion-card-content text-left>
+        <strong>Expert</strong>
+        <p>{{ chatMessage.text }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="chatMessage.senderType == 'client' && !user.isExpert" justify-content-end>
+    <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+      <p no-margin margin-start margin-end margin-top style="font-size: 0.8em">{{ getReadableDayFromDate(chatMessage.date) }} - {{ chatMessage.date.getHours() }}:{{ chatMessage.date.getMinutes() }} </p>
+    </ion-col>
+  </ion-row>
+<ion-row *ngIf="chatMessage.senderType == 'client' && !user.isExpert" justify-content-end>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <ion-card no-margin margin-start margin-end color="secondary">
+      <ion-card-content>
+        <p>{{ chatMessage.text }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+<!-- Experts -->
+<ion-row *ngIf="(chatMessage.senderType == 'expert' && user.isExpert)" justify-content-end>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <p no-margin margin-start margin-end margin-top style="font-size: 0.8em">{{ getReadableDayFromDate(chatMessage.date) }} - {{ chatMessage.date.getHours() }}:{{ chatMessage.date.getMinutes() }} </p>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="(chatMessage.senderType == 'expert' && user.isExpert)" justify-content-end>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <ion-card no-margin margin-start margin-end color="secondary">
+      <ion-card-content>
+        <p>{{ chatMessage.text }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+  
+<ion-row *ngIf="(chatMessage.senderType == 'client' && user.isExpert)" justify-content-start>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <p no-margin margin-start margin-end margin-top style="font-size: 0.8em">{{ getReadableDayFromDate(chatMessage.date) }} - {{ chatMessage.date.getHours() }}:{{ chatMessage.date.getMinutes() }} </p>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="(chatMessage.senderType == 'client' && user.isExpert)" justify-content-start>
+  <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2">
+    <ion-card no-margin margin-start margin-end color="light">
+      <ion-card-content text-left>
+        <strong>{{ clientEmail }}</strong>
+        <p>{{ chatMessage.text }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

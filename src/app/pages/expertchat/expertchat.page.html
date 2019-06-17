@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>
+        Expert Paneel
+      </ion-title>
+      <ion-buttons slot="primary">
+        <ion-button fill="solid" color="white" (click)="loadChats()" *ngIf="chats">
+          Refresh
+          <ion-icon slot="end" name="refresh"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <!-- Loading spinner -->
+    <ion-grid style="height: 100%" [hidden]="!loading">
+      <ion-row style="height: 100%" justify-content-center align-items-center>
+        <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2" text-center>
+          <ion-spinner width="6em"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <!-- List of chats-->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Chats</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let chat of chats" [routerLink]="['/tabs/expert/chat/', chat._id]" routerDirection="forward" detail>
+          <ion-label><strong>{{ chat.clientId.email }}</strong> {{ chat.updatedAt.toLocaleDateString() }} - {{ chat.updatedAt.getHours() }}:{{ chat.updatedAt.getMinutes() }}</ion-label>
+      </ion-item>
+    </ion-list>
+    
+  </ion-content>

@@ -13,14 +13,22 @@
                 <ion-label position="floating"><strong>Email</strong></ion-label>
                 <ion-input type="email" formControlName="email"></ion-input>
               </ion-item>
+              <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors.required">Email is required</div>
+                  <div *ngIf="f['email'].errors.email">This is not a valid email address</div>
+              </div>
             
               <ion-item>
-                <ion-label position="floating"><strong>Password</strong></ion-label>
+                <ion-label position="floating"><strong>Wachtwoord</strong></ion-label>
                 <ion-input type="password" formControlName="password"></ion-input>
               </ion-item>
+              <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors.required">Password is required</div>
+                  <div *ngIf="f['password'].errors.minlength">Password too short (+{{ 5 - f['password'].value.length }})</div>
+              </div>
             
-              <ion-button margin-top color="secondary" expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
-              <ion-button margin-top expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button>
+              <ion-button margin-top color="secondary" expand="full" type="submit" [disabled]="!credentialsForm.valid">Inloggen</ion-button>
+              <ion-button margin-top expand="full" type="button" (click)="register()">Registreren</ion-button>
             
             </form>
           </ion-card-content>

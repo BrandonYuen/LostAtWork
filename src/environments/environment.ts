@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'https://brandonyuen.nl:8888'
+    url: 'http://localhost:8888'
   }
 };
 

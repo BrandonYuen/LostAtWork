@@ -40,6 +40,7 @@ export class DiaryEntryCreatePage implements OnInit {
     if (!this.entryForm.invalid) {
       this.diaryService.createEntry(this.entryForm.value).subscribe(res => {
         this.navController.navigateBack(['tabs/diary/']);
+        this.diaryService.successToast('Gebeurtenis \'' + this.entryForm.value.title + '\' is aangemaakt.');
       });
     }
   }
@@ -47,15 +48,15 @@ export class DiaryEntryCreatePage implements OnInit {
   back() {
     // Show popup to cancel form creation
     const alert = this.alertController.create({
-      message: 'Are you sure you want to dismiss the current diary entry? Input will not be saved.',
-      header: 'Delete this entry?',
+      message: 'Weet je zeker dat je deze pagina wilt sluiten? Alles wat je hebt opgeschreven zal verdwijnen.',
+      header: 'Gebeurtenis verwijderen?',
       buttons: [
         {
-          text: 'No',
+          text: 'Nee',
           role: 'cancel'
         },
         {
-          text: 'Yes',
+          text: 'Ja',
           handler: () => {
             this.navController.navigateBack('/tabs/diary');
           }

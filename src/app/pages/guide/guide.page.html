@@ -3,8 +3,26 @@
     <ion-title>
       Guide
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" color="white" (click)="logout()">
+        Uitloggen
+        <ion-icon slot="end" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-card color="secondary">
+      <ion-card-content>
+          <h2><strong>Hey tester!</strong></h2>
+          <p>Bedankt dat je ons wilt helpen met het testen van onze app! Je doet mee aan een rollenspel waarin je een scenario bent toegewezen. Probeer je zo emotioneel mogelijk te verdiepen in je rol. We willen namelijk niet alleen het functionele aspect van de app testen, maar ook juist het emotionele aspect. Je mag natuurlijk improviseren, maar probeer binnen je rol te blijven.</p>
+      </ion-card-content>
+    </ion-card>
+  <ion-card color="light">
+    <ion-card-content>
+        <h2><strong>Wat is Lost At Work?</strong></h2>
+        <p>Ongewenst gedrag op de werkvloer kan zich voordoen in de vorm van discriminatie, (seksuele) intimidatie, pesten, agressie en geweld. Als je ongewild slachtoffer wordt van dergelijk gedrag kan je met behulp van deze app bewijs verzamelen over het ongewenst gedrag, bijvoorbeeld door dergelijk gedrag te herkennen, waar en wanneer het zich voordoet, wie er bij betrokken zijn etc. Je legt deze informatie vast in jouw elektronische dagboek. Tevens is de app bedoeld om je met behulp van een online chatbox steun te bieden, door te bespreken wat er gebeurd is en tot wie je je zou kunnen richten om het ongewenst gedrag te stoppen of om in het uiterste geval een klacht in te dienen. De app voorziet in reguliere contactmomenten waardoor je er nooit alleen voor komt te staan. De app LostAtWork is een initiatief van professionals uit het veld die ongewenst gedrag en de schadelijke gevolgen ervan een halt toe willen roepen.</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

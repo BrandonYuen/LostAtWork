@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Dagboek van client
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="noEntries">
+        <ion-card color="primary">
+          <ion-card-content text-center>
+            <strong>Je dagboek is leeg.</strong>
+            <h6>Klik de + knop om een nieuwe gebeurtenis toe te voegen. Probeer je dagboek goed bij te houden en de gebeurtenissen zo goed mogelijk te omschrijven. </h6>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm="6" size-md="4" *ngFor="let entry of diaryEntries">
+        <ion-card color="light" no-margin>
+          <ion-card-content>
+              <div margin-bottom>
+                <h3 no-margin> <strong>{{ entry.date.toLocaleDateString() }}</strong></h3>
+                <h1 no-margin> <strong>{{ entry.title }}</strong></h1>
+              </div>
+              <h2><strong>Type ongewenst gedrag</strong></h2>
+              <ion-chip color="secondary" margin-bottom>
+                <ion-label color="secondary">{{ entry.misconductType }}</ion-label>
+              </ion-chip>
+              <h2><strong>Beschrijving</strong></h2>
+              <p>{{ entry.content }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

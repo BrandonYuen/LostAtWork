@@ -50,6 +50,7 @@ export class DiaryEntryDetailPage implements OnInit {
     this.diaryService.removeEntry(entry).subscribe(res => {
       console.log('Successfully deleted entry with id', entry._id)
       this.navController.navigateBack(['tabs/diary']);
+      this.diaryService.successToast('Gebeurtenis \'' + entry.title + '\' is verwijderd.');
     });
   }
 

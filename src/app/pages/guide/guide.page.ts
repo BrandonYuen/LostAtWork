@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-guide',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['guide.page.scss']
 })
 
-export class GuidePage {}
+export class GuidePage {
+
+  constructor(private authService: AuthService) { }
+
+  logout() {
+    this.authService.logout();
+  }
+}

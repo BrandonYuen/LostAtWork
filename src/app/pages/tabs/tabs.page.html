@@ -3,18 +3,24 @@
   <ion-tab-bar [hidden]="hideTabBar$ | async" slot="bottom" color="primary">
     <ion-tab-button tab="diary">
       <ion-icon name="folder"></ion-icon>
-      <ion-label>Diary</ion-label>
+      <ion-label>Dagboek</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="guide">
+    <ion-tab-button tab="guide" *ngIf="!userIsExpert">
       <ion-icon name="book"></ion-icon>
-      <ion-label>Guide</ion-label>
+      <ion-label>Guidelines</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="chat">
+    <ion-tab-button tab="chat" *ngIf="!userIsExpert">
       <ion-icon name="chatboxes"></ion-icon>
       <ion-label>Chat</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="expert" *ngIf="userIsExpert">
+      <ion-icon name="chatboxes"></ion-icon>
+      <ion-label>Expert Paneel</ion-label>
+    </ion-tab-button>
+
   </ion-tab-bar>
 
 </ion-tabs>

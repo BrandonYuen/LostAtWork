@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DiaryEntry } from '../models/diary-entry.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { catchError, tap, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class DiaryService {
     diaryEntries: DiaryEntry[]
   };
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, private toastController: ToastController) {
     this.baseUrl = environment.api.url;
     this.dataStore = { diaryEntries: [] };
     this._diaryEntries = new BehaviorSubject([]) as BehaviorSubject<DiaryEntry[]>;
@@ -48,6 +49,21 @@ export class DiaryService {
       this.dataStore.diaryEntries = data;
       this._diaryEntries.next(Object.assign({}, this.dataStore).diaryEntries);
     }, error => console.log('Could not load todos.'));
+  }
+
+  getAllEntriesByUserId(userId: string) {
+    return this.http.get(`${environment.api.url}/api/user/${userId}/diary`)
+    .pipe(
+      catchError(e => {
+        throw new Error(e);
+      }),
+      map(entries => {
+        for (let entry of (entries as Array<DiaryEntry>)){
+          entry.date = new Date(entry.date);
+        }
+        return entries;
+      }),
+    )
   }
 
   fetchOneEntry(id: string) {
@@ -131,5 +147,15 @@ export class DiaryService {
         console.log('Removed entry with ID: ', entry._id);
       })
     );
+  }
+
+  async successToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      position: 'bottom',
+      color: 'light',
+      duration: 2000
+    });
+    toast.present();
   }
 }

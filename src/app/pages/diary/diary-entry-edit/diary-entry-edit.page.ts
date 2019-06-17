@@ -61,7 +61,7 @@ export class DiaryEntryEditPage implements OnInit {
             content: entry.content,
             misconductType: entry.misconductType
           });
-    
+
           // Automatically generate listeners for all inputs to hide tab bar
           this.hideTabsOnInput.createListeners();
         })
@@ -84,6 +84,7 @@ export class DiaryEntryEditPage implements OnInit {
     if (!this.entryForm.invalid) {
       this.diaryService.updateEntry(this.entryForm.value).subscribe(updatedEntry => {
         this.navController.navigateBack(['tabs/diary/entry', updatedEntry._id]);
+        this.diaryService.successToast('Gebeurtenis \'' + updatedEntry.title + '\' is aangepast.');
       });
     }
   }

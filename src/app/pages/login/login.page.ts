@@ -19,24 +19,29 @@ export class LoginPage implements OnInit {
     private navController: NavController
   ) { }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.credentialsForm.controls; }
+
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 
   onSubmit() {
     this.authService.login(this.credentialsForm.value).subscribe(res => {
       this.navController.navigateForward('/tabs');
-    }, err => {
-      if (err instanceof HttpErrorResponse) {
-        this.authService.showAlert('Can\'t connect to server.')
-      }
-    });
+    }, err => this.handleError(err));
   }
 
   register() {
+    if (!this.credentialsForm.valid) {
+      this.credentialsForm.controls.email.markAsTouched();
+      this.credentialsForm.controls.password.markAsTouched();
+      this.authService.showAlert('Please enter an email and password to register.');
+      return;
+    }
     this.authService.register(this.credentialsForm.value).subscribe(res => {
       // Call Login to automatically login the new user
       this.authService.login(this.credentialsForm.value).subscribe(res => {
@@ -47,7 +52,7 @@ export class LoginPage implements OnInit {
 
   handleError(e: any) {
     switch (e.status) {
-      case 400:
+      case 400 || 404:
         this.authService.showAlert(e.error.msg);
         break;
       default:

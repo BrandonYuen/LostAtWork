@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="primary">
-      <ion-title> New Entry </ion-title>
+      <ion-title> Nieuwe gebeurtenis </ion-title>
       <ion-buttons slot="start">
         <ion-button (click)="back()">
           <ion-icon name="close-circle"></ion-icon>
@@ -16,8 +16,8 @@
           
             <ion-item color="light">
               <!-- <ion-icon slot="start" name="log-out"></ion-icon> -->
-              <ion-label position="floating"><strong>Title</strong></ion-label>
-              <ion-input type="text" formControlName="title" placeholder="Write a title"></ion-input>
+              <ion-label position="floating"><strong>Titel</strong></ion-label>
+              <ion-input type="text" formControlName="title" placeholder="Schrijf een titel..."></ion-input>
             </ion-item>
             <div *ngIf="f['title'].invalid && (f['title'].dirty || f['title'].touched)" class="invalid-feedback">
                 <div *ngIf="f['title'].errors.required">Title is required</div>
@@ -25,15 +25,15 @@
             </div>
 
             <ion-item color="light" margin-top>
-              <ion-label position="floating"><strong>Type of misconduct</strong></ion-label>
+              <ion-label position="floating"><strong>Type ongewenst gedrag</strong></ion-label>
               <ion-select okText="Select" cancelText="Cancel" formControlName="misconductType" placeholder="Select misconduct type">
-                <ion-select-option value="Aggression">Aggression</ion-select-option>
-                <ion-select-option value="Bullying">Bullying</ion-select-option>
-                <ion-select-option value="Drug or Alcohol abuse">Drug or Alcohol abuse</ion-select-option>
-                <ion-select-option value="Discrimination">Discrimination</ion-select-option>
-                <ion-select-option value="Intimidation">Intimidation</ion-select-option>
-                <ion-select-option value="Sexual Intimidation">Sexual Intimidation</ion-select-option>
-                <ion-select-option value="Theft and Fraud">Theft and Fraud</ion-select-option>\
+                <ion-select-option value="Aggression">Aggressie</ion-select-option>
+                <ion-select-option value="Bullying">Pesten</ion-select-option>
+                <ion-select-option value="Drug or Alcohol abuse">Drugs of Alcohol misbruik</ion-select-option>
+                <ion-select-option value="Discrimination">Discriminatie</ion-select-option>
+                <ion-select-option value="Intimidation">Intimidatie</ion-select-option>
+                <ion-select-option value="Sexual Intimidation">Sexuele Intimidatie</ion-select-option>
+                <ion-select-option value="Theft and Fraud">Diefstal of Fraude</ion-select-option>\
               </ion-select>
             </ion-item>
             <div *ngIf="f['misconductType'].invalid && (f['misconductType'].dirty || f['misconductType'].touched)" class="invalid-feedback">
@@ -41,15 +41,15 @@
             </div>
 
             <ion-item color="light" margin-top class="form-group">
-              <ion-label position="floating"><strong>Description</strong></ion-label>
-              <ion-textarea rows="10" placeholder="Describe what happened..." formControlName="content"></ion-textarea>
+              <ion-label position="floating"><strong>Beschrijving</strong></ion-label>
+              <ion-textarea rows="10" placeholder="Beschrijf wat er is gebeurd..." formControlName="content"></ion-textarea>
             </ion-item>
             <div *ngIf="f['content'].invalid && (f['content'].dirty || f['content'].touched)" class="invalid-feedback">
                 <div *ngIf="f['content'].errors.required">Description is required</div>
                 <div *ngIf="f['content'].errors.minlength">Description must be at least 20 characters</div>
             </div>
           
-            <ion-button margin-top color="secondary" expand="full" type="submit" [disabled]="!entryForm.valid">Create</ion-button>
+            <ion-button margin-top color="secondary" expand="full" type="submit" [disabled]="!entryForm.valid">Aanmaken</ion-button>
           
           </form>
         </ion-card-content>

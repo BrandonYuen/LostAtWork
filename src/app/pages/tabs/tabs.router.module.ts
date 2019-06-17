@@ -54,8 +54,35 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'expert',
+        children: [
+          {
+            path: '',
+            loadChildren: '../expertchat/expertchat.module#ExpertchatPageModule'
+          },
+          {
+            path: 'chat/:chatId',
+            children: [
+              {
+                path: '',
+                loadChildren: '../chat/chat.module#ChatPageModule'
+              }
+            ]
+          },
+          {
+            path: 'user/:userId/diary',
+            children: [
+              {
+                path: '',
+                loadChildren: '../expertchat/clientdiary/clientdiary.module#ClientdiaryPageModule'
+              }
+            ]
+          }
+        ]
+      },
+      {
         path: '',
-        redirectTo: '/tabs/diary',
+        redirectTo: '/tabs/guide',
         pathMatch: 'full',
         canActivate: [AuthGuardService]
       }

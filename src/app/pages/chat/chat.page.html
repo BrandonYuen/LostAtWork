@@ -1,19 +1,81 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Expert Chat
+      Client Chat
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/expert" *ngIf="user.isExpert"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="white" *ngIf="user.isExpert && chat" [routerLink]="['/tabs/expert/user/', chat.clientId._id, 'diary']" routerDirection="forward">
+        Diary
+        <ion-icon slot="end" name="folder"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" color="white" (click)="loadChat()" *ngIf="chat">
+        <span *ngIf="!user.isExpert">Refresh</span>
+        <ion-icon slot="end" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid style="height: 100%">
+  <!-- Loading spinner -->
+  <ion-grid style="height: 100%" [hidden]="!loading">
     <ion-row style="height: 100%" justify-content-center align-items-center>
       <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2" text-center>
-        <ion-icon name="person" color="secondary" style="font-size: 64px;"></ion-icon>
-        <h2><strong>Talk to one of our experts.</strong></h2>
-        <p no-margin>Our experts are specialized in misconduct behaviour and help you process and evaluate your experiences.</p>
+        <ion-spinner width="6em"></ion-spinner>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- Request expert -->
+  <ion-grid style="height: 100%" [hidden]="(loading || chat)">
+    <ion-row style="height: 100%" justify-content-center align-items-center>
+      <ion-col size-xs="10" size-sm="8" size-md="6" size-lg="4" size-xl="3" size-xxl="2" text-center>
+        <ion-icon name="person" color="secondary" style="font-size: 64px;"></ion-icon>
+        <h2><strong>Chat met een expert.</strong></h2>
+        <p no-margin>Onze experts zijn gespecialiseerd in ongewenst gedrag en kunnen je helpen om jouw ervaringen te verwerken en te evalueren.</p>
+        <ion-button (click)="requestExpert()" margin color="secondary">Expert Inschakelen</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Chat -->
+  <ion-grid *ngIf="!loading && chat">
+
+    <ion-card color="primary">
+      <ion-card-content text-center>
+        <strong>De chat is geopend.</strong>
+        <h6>Typ onderaan je bericht en je zult binnen 24 uur een antwoord krijgen. De expert zal je dagboek bekijken om zo een goed beeld te krijgen van jouw situatie. Als opening kan je bijvoorbeeld opschrijven waar je het meeste mee zit en wat voor gevoelens daarmee gepaart gaan.</h6>
+      </ion-card-content>
+    </ion-card>
+
+    <span *ngFor="let chatMessage of chat.messages">
+        <app-chat-message [chatMessage]="chatMessage" [user]="user" [clientEmail]="chat.clientId.email"></app-chat-message>
+    </span>
+
+  </ion-grid>
 </ion-content>
+
+<!-- Input -->
+<ion-footer *ngIf="!loading && chat">
+  <form no-margin no-padding [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+  <ion-grid>
+    <ion-row justify-content-center no-padding no-margin>
+      <ion-col no-margin no-padding size-xs="10" size-sm="8" size-md="8" size-lg="6" size-xl="4" size-xxl="3">
+          <ion-card style="height: 100%" color="light" no-padding no-margin>
+            <ion-card-content no-padding padding-start padding-end >
+              <ion-textarea no-margin auto-focus="true" auto-grow rows="1" formControlName="message" placeholder="Schrijf een bericht" style="max-height: 7em; overflow-y: scroll"></ion-textarea>
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+      <ion-col no-margin no-padding size-xs="2">
+          <ion-button (mousedown)="onSubmit()" style="height: 100%; width: 100%;" color="secondary" no-margin no-padding >
+            <ion-icon name="send"></ion-icon>
+          </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </form>
+</ion-footer>
